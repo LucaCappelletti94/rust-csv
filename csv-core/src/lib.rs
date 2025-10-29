@@ -17,6 +17,7 @@ the `Writer` API provides a CSV writer.
 This example shows how to count the number of fields and records in CSV data.
 
 ```
+#[no_std]
 use csv_core::{Reader, ReadFieldResult};
 
 let data = "
