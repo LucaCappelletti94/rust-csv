@@ -744,6 +744,7 @@ type: `(String, String, Option<u64>, f64, f64)`.
 
 ```no_run
 //tutorial-read-serde-02.rs
+# #[cfg(feature = "serde")] {
 # use std::{error::Error, io, process};
 #
 // This introduces a type alias so that we can conveniently reference our
@@ -767,6 +768,12 @@ fn run() -> Result<(), Box<dyn Error>> {
 #         println!("{}", err);
 #         process::exit(1);
 #     }
+# }
+# }
+# #[cfg(not(feature = "serde"))] {
+# fn main() {
+#     println!("this example requires the 'serde' feature");
+# }
 # }
 ```
 
@@ -795,6 +802,7 @@ a new `use` statement that imports `HashMap` from the standard library:
 
 ```no_run
 //tutorial-read-serde-03.rs
+# #[cfg(feature = "serde")] {
 use std::collections::HashMap;
 # use std::{error::Error, io, process};
 
@@ -816,6 +824,12 @@ fn run() -> Result<(), Box<dyn Error>> {
 #         println!("{}", err);
 #         process::exit(1);
 #     }
+# }
+# }
+# #[cfg(not(feature = "serde"))] {
+# fn main() {
+#     println!("this example requires the 'serde' feature");
+# }
 # }
 ```
 
@@ -853,6 +867,7 @@ how. Don't miss the new Serde imports!
 ```no_run
 //tutorial-read-serde-04.rs
 # #![allow(dead_code)]
+# #[cfg(feature = "serde")] {
 # use std::{error::Error, io, process};
 
 // This lets us write `#[derive(Deserialize)]`.
@@ -890,6 +905,7 @@ fn main() {
         process::exit(1);
     }
 }
+# }
 ```
 
 Compile and run this program to see similar output as before:
@@ -990,6 +1006,7 @@ Let's start by running our program from the previous section:
 ```no_run
 //tutorial-read-serde-invalid-01.rs
 # #![allow(dead_code)]
+# #[cfg(feature = "serde")] {
 # use std::{error::Error, io, process};
 #
 # use serde::Deserialize;
@@ -1018,6 +1035,7 @@ fn run() -> Result<(), Box<dyn Error>> {
 #         println!("{}", err);
 #         process::exit(1);
 #     }
+# }
 # }
 ```
 
@@ -1058,6 +1076,7 @@ to a `None` value, as shown in this next example:
 ```no_run
 //tutorial-read-serde-invalid-02.rs
 # #![allow(dead_code)]
+# #[cfg(feature = "serde")] {
 # use std::{error::Error, io, process};
 #
 # use serde::Deserialize;
@@ -1086,6 +1105,12 @@ fn run() -> Result<(), Box<dyn Error>> {
 #         println!("{}", err);
 #         process::exit(1);
 #     }
+# }
+# }
+# #[cfg(not(feature = "serde"))] {
+# fn main() {
+#     println!("this example requires the 'serde' feature");
+# }
 # }
 ```
 
@@ -1350,6 +1375,7 @@ As with reading, let's start by seeing how we can serialize a Rust tuple.
 
 ```no_run
 //tutorial-write-serde-01.rs
+# #[cfg(feature = "serde")] {
 # use std::{error::Error, io, process};
 #
 fn run() -> Result<(), Box<dyn Error>> {
@@ -1377,6 +1403,12 @@ fn run() -> Result<(), Box<dyn Error>> {
 #         println!("{}", err);
 #         process::exit(1);
 #     }
+# }
+# }
+# #[cfg(not(feature = "serde"))] {
+# fn main() {
+#     println!("this example requires the 'serde' feature");
+# }
 # }
 ```
 
@@ -1418,6 +1450,7 @@ shown in the example:
 
 ```no_run
 //tutorial-write-serde-02.rs
+# #[cfg(feature = "serde")] {
 use std::{error::Error, io, process};
 
 use serde::Serialize;
@@ -1468,6 +1501,12 @@ fn main() {
         process::exit(1);
     }
 }
+# }
+# #[cfg(not(feature = "serde"))] {
+# fn main() {
+#     println!("this example requires the 'serde' feature");
+# }
+# }
 ```
 
 Compiling and running this example has the same output as last time, even
@@ -1731,6 +1770,7 @@ Now here's the code:
 
 ```no_run
 //tutorial-pipeline-pop-01.rs
+# #[cfg(feature = "serde")] {
 # use std::{env, error::Error, io, process};
 
 use serde::{Deserialize, Serialize};
@@ -1788,6 +1828,12 @@ fn main() {
         process::exit(1);
     }
 }
+# }
+# #[cfg(not(feature = "serde"))] {
+# fn main() {
+#     println!("this example requires the 'serde' feature");
+# }
+# }
 ```
 
 If we compile and run our program with a minimum threshold of `100000`, we
@@ -2076,6 +2122,7 @@ example using Serde in a previous section:
 ```no_run
 //tutorial-perf-serde-01.rs
 # #![allow(dead_code)]
+# #[cfg(feature = "serde")] {
 use std::{error::Error, io, process};
 
 use serde::Deserialize;
@@ -2116,6 +2163,12 @@ fn main() {
         }
     }
 }
+# }
+# #[cfg(not(feature = "serde"))] {
+# fn main() {
+#     println!("this example requires the 'serde' feature");
+# }
+# }
 ```
 
 Now compile and run this program:
@@ -2144,6 +2197,7 @@ like:
 ```no_run
 //tutorial-perf-serde-02.rs
 # #![allow(dead_code)]
+# #[cfg(feature = "serde")] {
 # use std::{error::Error, io, process};
 # use serde::Deserialize;
 #
@@ -2184,6 +2238,12 @@ fn run() -> Result<u64, Box<dyn Error>> {
 #             process::exit(1);
 #         }
 #     }
+# }
+# }
+# #[cfg(not(feature = "serde"))] {
+# fn main() {
+#     println!("this example requires the 'serde' feature");
+# }
 # }
 ```
 
@@ -2229,6 +2289,7 @@ of `StringRecord`:
 ```no_run
 //tutorial-perf-serde-03.rs
 # #![allow(dead_code)]
+# #[cfg(feature = "serde")] {
 # use std::{error::Error, io, process};
 #
 # use serde::Deserialize;
@@ -2270,6 +2331,12 @@ fn run() -> Result<u64, Box<dyn Error>> {
 #             process::exit(1);
 #         }
 #     }
+# }
+# }
+# #[cfg(not(feature = "serde"))] {
+# fn main() {
+#     println!("this example requires the 'serde' feature");
+# }
 # }
 ```
 

@@ -73,6 +73,7 @@ method.
 ```no_run
 # //cookbook-read-serde.rs
 # #![allow(dead_code)]
+# #[cfg(feature = "serde")] {
 use std::{error::Error, io, process};
 
 use serde::Deserialize;
@@ -104,6 +105,12 @@ fn main() {
         process::exit(1);
     }
 }
+# }
+# #[cfg(not(feature = "serde"))] {
+# fn main() {
+#     println!("this example requires the 'serde' feature");
+# }
+# }
 ```
 
 The above example can be run like so:
@@ -232,6 +239,7 @@ headers are written automatically.
 
 ```no_run
 # //cookbook-write-serde.rs
+# #[cfg(feature = "serde")] {
 use std::{error::Error, io, process};
 
 use serde::Serialize;
@@ -271,6 +279,12 @@ fn main() {
         process::exit(1);
     }
 }
+# }
+# #[cfg(not(feature = "serde"))] {
+# fn main() {
+#     println!("this example requires the 'serde' feature");
+# }
+# }
 ```
 
 The above example can be run like so:

@@ -1,3 +1,4 @@
+#![cfg(feature = "serde")]
 #![allow(dead_code)]
 use serde::Deserialize;
 use std::{error::Error, io, process};

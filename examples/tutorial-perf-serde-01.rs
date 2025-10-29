@@ -1,3 +1,4 @@
+#![cfg(feature = "serde")]
 #![allow(dead_code)]
 use std::{error::Error, io, process};
 

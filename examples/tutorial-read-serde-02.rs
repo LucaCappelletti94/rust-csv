@@ -1,3 +1,4 @@
+#![cfg(feature = "serde")]
 use std::{error::Error, io, process};
 
 // This introduces a type alias so that we can conveniently reference our

@@ -1,3 +1,4 @@
+#![cfg(feature = "serde")]
 use std::{error::Error, io, process};
 
 fn run() -> Result<(), Box<dyn Error>> {
