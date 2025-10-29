@@ -20,6 +20,11 @@ members = ["csv-core", "csv-index"]
 [lib]
 bench = false
 
+# Allow for needless main in doctest, as some examples are tutorials.
+[lints.clippy]
+needless_doctest_main = "allow"
+upper_case_acronyms = "allow"
+
 [dependencies]
 csv-core = { path = "csv-core", version = "0.1.11" }
 itoa = "1"
