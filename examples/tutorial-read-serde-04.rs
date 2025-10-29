@@ -1,8 +1,9 @@
-#![cfg(feature = "serde")]
 #![allow(dead_code)]
+#[cfg(feature = "serde")]
 use std::{error::Error, io, process};
 
 // This lets us write `#[derive(Deserialize)]`.
+#[cfg(feature = "serde")]
 use serde::Deserialize;
 
 // We don't need to derive `Debug` (which doesn't require Serde), but it's a
@@ -10,6 +11,7 @@ use serde::Deserialize;
 //
 // Notice that the field names in this struct are NOT in the same order as
 // the fields in the CSV data!
+#[cfg(feature = "serde")]
 #[derive(Debug, Deserialize)]
 #[serde(rename_all = "PascalCase")]
 struct Record {
@@ -20,6 +22,7 @@ struct Record {
     state: String,
 }
 
+#[cfg(feature = "serde")]
 fn run() -> Result<(), Box<dyn Error>> {
     let mut rdr = csv::Reader::from_reader(io::stdin());
     for result in rdr.deserialize() {
@@ -31,9 +34,14 @@ fn run() -> Result<(), Box<dyn Error>> {
     Ok(())
 }
 
+#[cfg(feature = "serde")]
 fn main() {
     if let Err(err) = run() {
         println!("{}", err);
         process::exit(1);
     }
+}
+#[cfg(not(feature = "serde"))]
+fn main() {
+    println!("this example requires the 'serde' feature");
 }
