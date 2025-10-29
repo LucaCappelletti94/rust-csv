@@ -94,9 +94,9 @@ By default, the member names of the struct are matched with the values in the
 header record of your CSV data.
 
 ```no_run
-# #[cfg(feature = "serde")] {
 use std::{error::Error, io, process};
 
+# #[cfg(feature = "serde")]
 #[derive(Debug, serde::Deserialize)]
 struct Record {
     city: String,
@@ -105,6 +105,7 @@ struct Record {
     population: Option<u64>,
 }
 
+# #[cfg(feature = "serde")]
 fn example() -> Result<(), Box<dyn Error>> {
     let mut rdr = csv::Reader::from_reader(io::stdin());
     for result in rdr.deserialize() {
@@ -116,17 +117,16 @@ fn example() -> Result<(), Box<dyn Error>> {
     Ok(())
 }
 
+# #[cfg(feature = "serde")]
 fn main() {
     if let Err(err) = example() {
         println!("error running example: {}", err);
         process::exit(1);
     }
 }
-# }
-# #[cfg(not(feature = "serde"))] {
+# #[cfg(not(feature = "serde"))]
 # fn main() {
 #     println!("this example requires the 'serde' feature");
-# }
 # }
 ```
 

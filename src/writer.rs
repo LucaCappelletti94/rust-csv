@@ -160,11 +160,12 @@ impl WriterBuilder {
     /// names of a struct.
     ///
     /// ```
-    /// # #[cfg(feature = "serde")] {
+    /// # #[allow(dead_code)]
     /// use std::error::Error;
     ///
     /// use csv::WriterBuilder;
     ///
+    /// # #[cfg(feature = "serde")]
     /// #[derive(serde::Serialize)]
     /// struct Row<'a> {
     ///     city: &'a str,
@@ -175,7 +176,9 @@ impl WriterBuilder {
     ///     population: u64,
     /// }
     ///
+    /// # #[cfg(feature = "serde")]
     /// # fn main() { example().unwrap(); }
+    /// # #[cfg(feature = "serde")]
     /// fn example() -> Result<(), Box<dyn Error>> {
     ///     let mut wtr = WriterBuilder::new().from_writer(vec![]);
     ///     wtr.serialize(Row {
@@ -197,7 +200,8 @@ impl WriterBuilder {
     /// ");
     ///     Ok(())
     /// }
-    /// # }
+    /// # #[cfg(not(feature = "serde"))]
+    /// # fn main() {}
     /// ```
     ///
     /// # Example: without headers
@@ -208,11 +212,12 @@ impl WriterBuilder {
     /// explicitly want to both write custom headers and serialize structs.
     ///
     /// ```
-    /// # #[cfg(feature = "serde")] {
     /// use std::error::Error;
     /// use csv::WriterBuilder;
     ///
+    /// # #[cfg(feature = "serde")]
     /// # fn main() { example().unwrap(); }
+    /// # #[cfg(feature = "serde")]
     /// fn example() -> Result<(), Box<dyn Error>> {
     ///     let mut wtr = WriterBuilder::new().from_writer(vec![]);
     ///     wtr.serialize(("Boston", "United States", 4628910))?;
@@ -225,7 +230,8 @@ impl WriterBuilder {
     /// ");
     ///     Ok(())
     /// }
-    /// # }
+    /// # #[cfg(not(feature = "serde"))]
+    /// # fn main() {}
     /// ```
     pub fn has_headers(&mut self, yes: bool) -> &mut WriterBuilder {
         self.has_headers = yes;
